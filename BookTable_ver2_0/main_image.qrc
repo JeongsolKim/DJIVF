@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>c54323942a5b08df8411e33e25680ab3-pile-of-books-vector-by-vexels.png</file>
+  </qresource>
+  <qresource prefix="search_icon">
+    <file>active-search.png</file>
+  </qresource>
+  <qresource prefix="menu_icon">
+    <file>newfile_icon_1.png</file>
+    <file>openfile_icon_1.png</file>
+    <file>savefile_icon_1.png</file>
+    <file>setting_icon_1.png</file>
+    <file>sell_icon_1.png</file>
+    <file>status_icon_1.png</file>
+  </qresource>
+</RCC>
