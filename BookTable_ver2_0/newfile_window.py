@@ -3,7 +3,7 @@
 import os, sys, datetime
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from PyQt5.QtCore import pyqtSlot, QSize, QDir, Qt
+from PyQt5.QtCore import pyqtSlot, QSize, QDir, Qt, QEvent
 from BookTable_ver2_0.utils import *
 
 class Newfile_window():
@@ -18,6 +18,9 @@ class Newfile_window():
 
         self.mainwindow.treeView.clicked['QModelIndex'].connect(self.get_file_path)
         self.mainwindow.submit_button.clicked.connect(self.set_file_path)
+
+        self.mainwindow.newfile_dragdrop.setAcceptDrops(True)
+
 
     def get_file_path(self, index):
         indexItem = self.mainwindow.model.index(index.row(), 0, index.parent())
@@ -46,4 +49,3 @@ class Newfile_window():
 
         # update main window
         self.mainwindow.update_main_tables()
-

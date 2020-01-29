@@ -107,6 +107,8 @@ class MyWindow(QMainWindow, main_class):
     def statusWindow(self):
         self.status_helper = Status_window(self, self.figure_helper)
 
+# -------------------------------------------------------------------------------------#
+
     def closeWindow(self):
         self.close()
 
@@ -262,7 +264,3 @@ app = QApplication(sys.argv)
 window = MyWindow()
 window.show()
 app.exec_()
-
-'''
- 
-'''

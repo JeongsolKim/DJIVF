@@ -1677,6 +1677,25 @@ color: rgb(255, 255, 255);</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
+       <widget class="QLabel" name="label_18">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>19</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>맑은 고딕 Semilight</family>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>파일 생성하기</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QFrame" name="color_frame_10">
        <property name="geometry">
@@ -1763,12 +1782,31 @@ color: rgb(255, 255, 255);</string>
         <rect>
          <x>20</x>
          <y>80</y>
-         <width>671</width>
+         <width>1001</width>
          <height>21</height>
         </rect>
        </property>
+       <property name="acceptDrops">
+        <bool>false</bool>
+       </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+      </widget>
+      <widget class="QPlainTextEdit" name="newfile_dragdrop">
+       <property name="geometry">
+        <rect>
+         <x>700</x>
+         <y>110</y>
+         <width>321</width>
+         <height>541</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(255,255,255);</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
        </property>
       </widget>
      </widget>
@@ -2399,6 +2437,22 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
     <hint type="destinationlabel">
      <x>1123</x>
      <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>repaint_button</sender>
+   <signal>clicked()</signal>
+   <receiver>dirPlainText</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>618</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>92</y>
     </hint>
    </hints>
   </connection>
