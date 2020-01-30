@@ -23,7 +23,6 @@ class MyWindow(QMainWindow, main_class):
         #self.setWindowFlags(Qt.FramelessWindowHint)
 
         # initialize for file directory.
-        self.file_name = ''
         self.file_dir = ''
         self.folder_name = ''
         self.folder_dir = ''
@@ -106,6 +105,8 @@ class MyWindow(QMainWindow, main_class):
 
     def statusWindow(self):
         self.status_helper = Status_window(self, self.figure_helper)
+
+# -------------------------------------------------------------------------------------#
 
     def closeWindow(self):
         self.close()
@@ -262,7 +263,3 @@ app = QApplication(sys.argv)
 window = MyWindow()
 window.show()
 app.exec_()
-
-'''
- 
-'''
