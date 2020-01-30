@@ -19,8 +19,8 @@ class Newfile_window():
         self.mainwindow.treeView.clicked['QModelIndex'].connect(self.get_file_path)
         self.mainwindow.submit_button.clicked.connect(self.set_file_path)
 
-        self.mainwindow.newfile_dragdrop.setAcceptDrops(True)
-
+        #self.mainwindow.newfile_dragdrop.setAcceptDrops(True)
+        #self.mainwindow.newfile_dragdrop.textChanged.connect(self.drag_N_drop)
 
     def get_file_path(self, index):
         indexItem = self.mainwindow.model.index(index.row(), 0, index.parent())
@@ -49,3 +49,6 @@ class Newfile_window():
 
         # update main window
         self.mainwindow.update_main_tables()
+
+    def drag_N_drop(self):
+        pass
