@@ -19,8 +19,7 @@ class Newfile_window():
         self.mainwindow.treeView.clicked['QModelIndex'].connect(self.get_file_path)
         self.mainwindow.submit_button.clicked.connect(self.set_file_path)
 
-        #self.mainwindow.newfile_dragdrop.setAcceptDrops(True)
-        #self.mainwindow.newfile_dragdrop.textChanged.connect(self.drag_N_drop)
+        self.mainwindow.test_layout.addWidget(Drop_site(self.mainwindow))
 
     def get_file_path(self, index):
         indexItem = self.mainwindow.model.index(index.row(), 0, index.parent())
@@ -50,5 +49,20 @@ class Newfile_window():
         # update main window
         self.mainwindow.update_main_tables()
 
-    def drag_N_drop(self):
-        pass
+class Drop_site(QWidget):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        self.mainwindow = parent
+        self.setAcceptDrops(True)
+        self.setStyleSheet('background-color:rgb(255,255,255)')
+
+    def dragEnterEvent(self, e):
+        if e.mimeData().hasFormat('text/uri-list'):
+            e.accept()
+        else:
+            e.ignore()
+
+    def dropEvent(self, e):
+        #img = e.mimeData().imageData()
+        self.mainwindow.file_dir = e.mimeData().urls()[-1].toLocalFile()

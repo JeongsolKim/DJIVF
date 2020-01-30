@@ -23,7 +23,6 @@ class MyWindow(QMainWindow, main_class):
         #self.setWindowFlags(Qt.FramelessWindowHint)
 
         # initialize for file directory.
-        self.file_name = ''
         self.file_dir = ''
         self.folder_name = ''
         self.folder_dir = ''
