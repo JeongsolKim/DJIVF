@@ -13,13 +13,14 @@ class Newfile_window():
         self.mainwindow.model = QFileSystemModel()
         self.mainwindow.model.setRootPath(self.mainwindow.pathRoot)
         self.mainwindow.indexRoot = self.mainwindow.model.index(self.mainwindow.model.rootPath())
-        self.mainwindow.treeView.setModel(self.mainwindow.model)
-        self.mainwindow.treeView.setRootIndex(self.mainwindow.indexRoot)
+        self.mainwindow.New_treeView.setModel(self.mainwindow.model)
+        self.mainwindow.New_treeView.setRootIndex(self.mainwindow.indexRoot)
 
-        self.mainwindow.treeView.clicked['QModelIndex'].connect(self.get_file_path)
-        self.mainwindow.submit_button.clicked.connect(self.set_file_path)
+        self.mainwindow.New_treeView.clicked['QModelIndex'].connect(self.get_file_path)
+        self.mainwindow.New_submit_button.clicked.connect(self.set_file_path)
 
-        self.mainwindow.test_layout.addWidget(Drop_site(self.mainwindow))
+        self.mainwindow.New_layout.addWidget(Drop_site(self.mainwindow))
+
 
     def get_file_path(self, index):
         indexItem = self.mainwindow.model.index(index.row(), 0, index.parent())
@@ -27,10 +28,10 @@ class Newfile_window():
         self.mainwindow.file_name = self.mainwindow.model.fileName(indexItem)
         self.mainwindow.file_dir = self.mainwindow.model.filePath(indexItem)
 
-        self.mainwindow.dirPlainText.setPlainText(self.mainwindow.file_dir)
+        self.mainwindow.New_dirPlainText.setPlainText(self.mainwindow.file_dir)
 
     def set_file_path(self):  # trick.
-        if self.mainwindow.file_name == '':
+        if self.mainwindow.file_dir == '':
             return 0
         self.mainwindow.main_stack.setCurrentIndex(0)
         if self.mainwindow.newfile_button.isChecked():
@@ -55,7 +56,7 @@ class Drop_site(QWidget):
 
         self.mainwindow = parent
         self.setAcceptDrops(True)
-        self.setStyleSheet('background-color:rgb(255,255,255)')
+        self.setStyleSheet('background-color:white')
 
     def dragEnterEvent(self, e):
         if e.mimeData().hasFormat('text/uri-list'):
@@ -66,3 +67,4 @@ class Drop_site(QWidget):
     def dropEvent(self, e):
         #img = e.mimeData().imageData()
         self.mainwindow.file_dir = e.mimeData().urls()[-1].toLocalFile()
+        self.mainwindow.New_dirPlainText.setPlainText(self.mainwindow.file_dir)
