@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from BookTable_ver2_0.utils import *
-
+from BookTable_ver2_0.backup_answer import Backup_window
 
 
 class Setting_window():
@@ -19,7 +19,8 @@ class Setting_window():
         self.mainwindow.setting_reset.clicked.connect(self.reset_setting)
         #self.mainwindow.filebackup_button.clicked.connect(self.back_up)
         self.mainwindow.filereset_button.clicked.connect(self.reset_really)
-        self.mainwindow.colorwidget_button.clicked.connect(self.color_setting)
+        self.mainwindow.colorwidget_button.clicked.connect(self.color_apply_test)
+        self.mainwindow.filebackup_button.clicked.connect(self.back_up)
 
     def load_setting(self):
         self.IsAutosave = get_setting('settings.txt', 'AUTOSAVE') == 'True'
@@ -55,6 +56,7 @@ class Setting_window():
         set_setting('./settings.txt', 'TUTORIAL', self.IsTutorial)
         set_setting('./settings.txt', 'MAINCOLOR', self.color_helper.color)
         self.update_checkbox()
+        self.color_setting()
         self.set_autosaver()
 
     def set_autosaver(self):
@@ -97,13 +99,21 @@ class Setting_window():
 
     # -------------------------------------------------------------------------------------- #
     def color_setting(self):
-        self.color_helper.set_color(False)
+        self.color_helper.change_color(self.color_helper.color, 'color_')
+
+    def color_apply_test(self):
+        self.color_helper.set_color(False, 'test_color')
 
     def back_up(self):
-        pass
+        if self.mainwindow.db_dir == '':
+            return 0
+
+        backup_window = Backup_window(self.mainwindow)
+        backup_window.exec_()
+
 
     def reset_really(self):
-        if self.mainwindow.file_name == '':
+        if self.mainwindow.db_dir == '':
             return 0
 
         buttonReply = QMessageBox.question(self, '초기화 확인', "정말로 파일을 초기화 하시겠습니까? 초기화 이후에는 복구가 불가능합니다.",

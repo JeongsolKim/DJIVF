@@ -30,7 +30,7 @@
      <number>1</number>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="about_sell">
      <widget class="QFrame" name="about_sell_frame">
@@ -184,7 +184,7 @@ border-radius: 5px;
         <number>150</number>
        </attribute>
        <attribute name="verticalHeaderVisible">
-        <bool>true</bool>
+        <bool>false</bool>
        </attribute>
        <column>
         <property name="text">
@@ -1262,7 +1262,7 @@ color: rgb(255, 255, 255);</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QFrame" name="color_frame_26">
+        <widget class="QFrame" name="test_color3">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -1300,7 +1300,7 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </widget>
-        <widget class="QFrame" name="color_frame_27">
+        <widget class="QFrame" name="test_color2">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -1318,27 +1318,8 @@ color: rgb(255, 255, 255);</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QFrame" name="frame_28">
-          <property name="geometry">
-           <rect>
-            <x>350</x>
-            <y>0</y>
-            <width>495</width>
-            <height>10</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(29, 48, 90);</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
         </widget>
-        <widget class="QLabel" name="test_color">
+        <widget class="QLabel" name="test_color1">
          <property name="geometry">
           <rect>
            <x>150</x>

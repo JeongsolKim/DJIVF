@@ -8,28 +8,28 @@ class Color_helper():
     def __init__(self, mainwindow):
         self.mainwindow = mainwindow
         self.ColorDialog = QColorDialog()
-        self.button_list = ['sell_button_2', 'filebackup_button', 'filereset_button', 'setting_save', 'submit_button', 'colorwidget_button','test_color']
+        self.button_list = ['sell_button_2', 'filebackup_button', 'filereset_button', 'setting_save', 'submit_button', 'colorwidget_button', 'backup_accept']
 
     def get_color_from_setting(self):
         self.color = get_setting('./settings.txt', 'MAINCOLOR')
 
-    def set_color(self, init=True):
+    def set_color(self, init=True, target='color_'):
         if init:
             self.change_color(self.color)
         elif not init:
             selected_color = self.ColorDialog.getColor()
             if selected_color.isValid():
                 self.color = selected_color.name()
-                self.change_color(self.color)
+                self.change_color(self.color, target)
 
-    def change_color(self, selected_color):
+    def change_color(self, selected_color, target='color_'):
         set = self.mainwindow.findChildren(QWidget)
-        word_color = self.determine_word_color_using_brightness('perceived2',120)
+        word_color = self.determine_word_color_using_brightness('perceived2', 120)
 
         for object in set:
-            if 'color_' in object.objectName():
+            if target in object.objectName():
                 object.setStyleSheet('background-color:' + selected_color)
-            elif object.objectName() in self.button_list:
+            elif object.objectName() in self.button_list and target=='color_':
                 object.setStyleSheet('background-color:' + selected_color +'; color:'+word_color+';')
 
     def determine_word_color_using_brightness(self, method='standard', threshold=125):
