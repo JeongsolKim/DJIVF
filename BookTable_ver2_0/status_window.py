@@ -7,7 +7,7 @@ class Status_window():
         self.mainwindow = mainwindow
         self.figure_helper = figure_helper
 
-        if not self.mainwindow.file_name == '':
+        if not self.mainwindow.db_dir == '':
             self.timer = QTimer()
             self.timer.start(1000)  # unit=milliseconds.
             self.timer.timeout.connect(self.update_status)

@@ -184,7 +184,7 @@ border-radius: 5px;
         <number>150</number>
        </attribute>
        <attribute name="verticalHeaderVisible">
-        <bool>false</bool>
+        <bool>true</bool>
        </attribute>
        <column>
         <property name="text">

@@ -53,6 +53,16 @@ class MyWindow(QMainWindow, main_class):
         self.savefile_button.setIcon(QtGui.QIcon('./Images/savefile_icon_1.png'))
         self.savefile_button.setIconSize(QSize(self.menu_icon_size, self.menu_icon_size))
 
+        # Talbe header size control
+        nonsell_header = self.nonsell_table.horizontalHeader()
+        nonsell_header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        nonsell_header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+
+        sell_header = self.timesell_table.horizontalHeader()
+        sell_header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        sell_header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        sell_header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+
         # initialize for color
         self.color_helper = Color_helper(self)
         self.color_helper.get_color_from_setting()
@@ -157,7 +167,7 @@ class MyWindow(QMainWindow, main_class):
             self.statusBar.showMessage('Last save: ' + self.last_save.strftime("%Y-%m-%d %H:%M:%S") + ' (autosave).')
 
     def change(self):
-        if self.file_dir == '':
+        if self.db_dir == '':
             return 0
         soldcol = self.excel.columns.get_loc('판매여부')
         timecol = self.excel.columns.get_loc('판매일시')

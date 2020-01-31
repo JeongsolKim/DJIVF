@@ -25,6 +25,7 @@ class Setting_window():
         self.IsAutosave = get_setting('settings.txt', 'AUTOSAVE') == 'True'
         self.Autosave_step = get_setting('settings.txt', 'AUTOSAVE_STEP')
         self.IsTutorial = get_setting('settings.txt', 'TUTORIAL') == 'True'
+        self.set_autosaver()
 
     def reset_setting(self):
         set_setting('settings.txt', 'AUTOSAVE', self.init_values.get('AUTOSAVE'))
@@ -36,6 +37,7 @@ class Setting_window():
         self.update_checkbox()
         self.color_helper.get_color_from_setting()
         self.color_helper.set_color()
+        self.set_autosaver()
 
     def get_autosave(self):
         self.IsAutosave = self.mainwindow.Autosave_check.isChecked()
@@ -53,6 +55,18 @@ class Setting_window():
         set_setting('./settings.txt', 'TUTORIAL', self.IsTutorial)
         set_setting('./settings.txt', 'MAINCOLOR', self.color_helper.color)
         self.update_checkbox()
+        self.set_autosaver()
+
+    def set_autosaver(self):
+        if not self.IsAutosave:
+            if self.mainwindow.timer.isActive():
+                self.mainwindow.timer.stop()
+        elif self.IsAutosave:
+            if not self.mainwindow.timer.isActive():
+                self.mainwindow.timer.start(int(self.Autosave_step) * 60 * 1000)
+            elif self.mainwindow.timer.isActive():
+                self.mainwindow.timer.stop()
+                self.mainwindow.timer.start(int(self.Autosave_step) * 60 * 1000)
 
     def set_spinbox(self):
         if self.mainwindow.Autosave_check.isChecked():
