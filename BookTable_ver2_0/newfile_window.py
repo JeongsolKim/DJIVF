@@ -15,7 +15,10 @@ class Newfile_window():
         self.mainwindow.indexRoot = self.mainwindow.model.index(self.mainwindow.model.rootPath())
         self.mainwindow.New_treeView.setModel(self.mainwindow.model)
         self.mainwindow.New_treeView.setRootIndex(self.mainwindow.indexRoot)
-
+        
+        self.mainwindow.New_treeView.header().setStretchLastSection(True)
+        self.mainwindow.New_treeView.header().resizeSection(0,300)
+        
         self.mainwindow.New_treeView.clicked['QModelIndex'].connect(self.get_file_path)
         self.mainwindow.New_submit_button.clicked.connect(self.set_file_path)
 

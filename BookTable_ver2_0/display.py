@@ -14,7 +14,7 @@ from BookTable_ver2_0.status_window import Status_window
 from BookTable_ver2_0.figure_helper import Figure_helper
 from BookTable_ver2_0.utils import *
 
-main_class = uic.loadUiType("main_design.ui")[0]
+main_class = uic.loadUiType("main_renewal.ui")[0]
 
 class MyWindow(QMainWindow, main_class):
     def __init__(self):
@@ -34,9 +34,9 @@ class MyWindow(QMainWindow, main_class):
         self.nonsell_list = []
 
         # Search bar icon setting.
-        self.search_icon_size = 25
-        self.search_icon.setIcon(QtGui.QIcon('./Images/active-search.png'))
-        self.search_icon.setIconSize(QSize(self.search_icon_size, self.search_icon_size))
+        #self.search_icon_size = 25
+        #self.search_icon.setIcon(QtGui.QIcon('./Images/active-search.png'))
+        #self.search_icon.setIconSize(QSize(self.search_icon_size, self.search_icon_size))
 
         # Menu bar icon setting.
         self.menu_icon_size = 40

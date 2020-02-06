@@ -17,6 +17,9 @@ class Openfile_window():
         self.mainwindow.Open_treeView.setModel(self.mainwindow.model)
         self.mainwindow.Open_treeView.setRootIndex(self.mainwindow.indexRoot)
 
+        self.mainwindow.Open_treeView.header().setStretchLastSection(True)
+        self.mainwindow.Open_treeView.header().resizeSection(0, 300)
+
         self.mainwindow.Open_treeView.clicked['QModelIndex'].connect(self.get_file_path)
         self.mainwindow.Open_submit_button.clicked.connect(self.set_file_path)
 

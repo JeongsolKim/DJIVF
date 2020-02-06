@@ -111,7 +111,6 @@ class Setting_window():
         backup_window = Backup_window(self.mainwindow)
         backup_window.exec_()
 
-
     def reset_really(self):
         if self.mainwindow.db_dir == '':
             return 0

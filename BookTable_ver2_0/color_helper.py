@@ -28,7 +28,7 @@ class Color_helper():
 
         for object in set:
             if target in object.objectName():
-                object.setStyleSheet('background-color:' + selected_color)
+                object.setStyleSheet('background-color:' + selected_color +'; color:'+word_color+';')
             elif object.objectName() in self.button_list and target=='color_':
                 object.setStyleSheet('background-color:' + selected_color +'; color:'+word_color+';')
 
