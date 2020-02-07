@@ -24,6 +24,6 @@ class Backup_window(QDialog, main_class):
         create_folder('/'.join(Dir[:-2])+'/backup')
         save_DB(self.mainwindow.excel, '/'.join(Dir[:-2])+'/backup'+'/backup_'+Dir[-1])
 
-        self.mainwindow.statusBar.showMessage('File Backup')
+        self.mainwindow.statusBar().showMessage('File Backup')
         self.close()
 

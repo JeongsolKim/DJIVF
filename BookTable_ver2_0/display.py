@@ -154,17 +154,17 @@ class MyWindow(QMainWindow, main_class):
             return 0
 
         if self.sender().objectName() == 'savefile_button':
-            self.statusBar.showMessage('Saving...', 1000)
+            self.statusBar().showMessage('Saving...', 1000)
         else:
-            self.statusBar.showMessage('AutoSaving...', 1000)
+            self.statusBar().showMessage('AutoSaving...', 1000)
 
         save_DB(self.excel, self.db_dir)
 
         self.last_save = datetime.datetime.now()
         if self.sender().objectName() == 'savefile_button':
-            self.statusBar.showMessage('Last save: '+self.last_save.strftime("%Y-%m-%d %H:%M:%S")+'.')
+            self.statusBar().showMessage('Last save: '+self.last_save.strftime("%Y-%m-%d %H:%M:%S")+'.')
         else:
-            self.statusBar.showMessage('Last save: ' + self.last_save.strftime("%Y-%m-%d %H:%M:%S") + ' (autosave).')
+            self.statusBar().showMessage('Last save: ' + self.last_save.strftime("%Y-%m-%d %H:%M:%S") + ' (autosave).')
 
     def change(self):
         if self.db_dir == '':

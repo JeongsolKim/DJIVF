@@ -8,7 +8,11 @@ from BookTable_ver2_0.utils import *
 
 class Newfile_window():
     def __init__(self, mainwindow):
+        self.fdir = ''
+        self.fname = ''
+
         self.mainwindow = mainwindow
+        self.repaint()
         self.mainwindow.pathRoot = QDir.rootPath()
         self.mainwindow.model = QFileSystemModel()
         self.mainwindow.model.setRootPath(self.mainwindow.pathRoot)
@@ -21,21 +25,27 @@ class Newfile_window():
         
         self.mainwindow.New_treeView.clicked['QModelIndex'].connect(self.get_file_path)
         self.mainwindow.New_submit_button.clicked.connect(self.set_file_path)
+        self.mainwindow.New_repaint_button.clicked.connect(self.repaint)
 
-        self.mainwindow.New_layout.addWidget(Drop_site(self.mainwindow))
+        self.mainwindow.New_layout.addWidget(Drop_site(self.mainwindow, self))
+        self.mainwindow.New_widget.setStyleSheet('Image:url(./Images/Drop_icon_excel_1.png); background-color:white')
 
 
     def get_file_path(self, index):
         indexItem = self.mainwindow.model.index(index.row(), 0, index.parent())
 
-        self.mainwindow.file_name = self.mainwindow.model.fileName(indexItem)
-        self.mainwindow.file_dir = self.mainwindow.model.filePath(indexItem)
+        self.fname = self.mainwindow.model.fileName(indexItem)
+        self.fdir = self.mainwindow.model.filePath(indexItem)
 
-        self.mainwindow.New_dirPlainText.setPlainText(self.mainwindow.file_dir)
+        self.mainwindow.New_dirPlainText.setPlainText(self.fdir)
 
     def set_file_path(self):  # trick.
-        if self.mainwindow.file_dir == '':
+        if self.fdir == '':
             return 0
+
+        self.mainwindow.file_name = self.fname
+        self.mainwindow.file_dir = self.fdir
+
         self.mainwindow.main_stack.setCurrentIndex(0)
         if self.mainwindow.newfile_button.isChecked():
             self.mainwindow.newfile_button.toggle()
@@ -53,11 +63,17 @@ class Newfile_window():
         # update main window
         self.mainwindow.update_main_tables()
 
+    def repaint(self):
+        self.fdir = ''
+        self.mainwindow.New_widget.setStyleSheet('Image:url(./Images/Drop_icon_excel_1.png); background-color:white')
+        self.mainwindow.New_label.setText('')
+
 class Drop_site(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, page):
         super().__init__(parent)
 
         self.mainwindow = parent
+        self.page = page
         self.setAcceptDrops(True)
         self.setStyleSheet('background-color:white')
 
@@ -68,6 +84,14 @@ class Drop_site(QWidget):
             e.ignore()
 
     def dropEvent(self, e):
-        #img = e.mimeData().imageData()
-        self.mainwindow.file_dir = e.mimeData().urls()[-1].toLocalFile()
-        self.mainwindow.New_dirPlainText.setPlainText(self.mainwindow.file_dir)
+        get_dir = e.mimeData().urls()[-1].toLocalFile()
+        if get_dir.split('.')[-1] == 'xlsx':
+            self.mainwindow.New_widget.setStyleSheet(
+                'border-image:url(./Images/excel_icon_1.png) 0 0 0 0 stretch stretch')
+            self.page.fdir = get_dir
+            self.mainwindow.New_dirPlainText.setPlainText(self.page.fdir)
+            self.mainwindow.New_label.setText(get_dir.split('/')[-1])
+        else:
+            self.mainwindow.New_widget.setStyleSheet('Image:url(./Images/Drop_icon_excel_2.png); background-color:white')
+            self.mainwindow.New_dirPlainText.setPlainText('')
+            self.mainwindow.New_label.setText('')
