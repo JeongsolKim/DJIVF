@@ -31,14 +31,14 @@
      <number>0</number>
     </property>
     <item row="1" column="1">
-     <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
+     <layout class="QGridLayout" name="gridLayout" columnstretch="0">
       <property name="spacing">
        <number>5</number>
       </property>
       <item row="0" column="0">
        <widget class="QStackedWidget" name="main_stack">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout_4" rowstretch="1,10">
@@ -280,6 +280,9 @@
                       <property name="frameShape">
                        <enum>QFrame::NoFrame</enum>
                       </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
+                      </property>
                      </widget>
                     </item>
                     <item row="1" column="0">
@@ -361,6 +364,9 @@
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::NoFrame</enum>
+                      </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>
@@ -2177,6 +2183,9 @@ color:rgb(255,255,255);</string>
                         </property>
                         <item row="0" column="0">
                          <widget class="QPushButton" name="recent_file6">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>
@@ -2219,6 +2228,9 @@ color:rgb(255,255,255);</string>
                         </property>
                         <item row="0" column="0">
                          <widget class="QPushButton" name="recent_file5">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>
@@ -2261,6 +2273,9 @@ color:rgb(255,255,255);</string>
                         </property>
                         <item row="0" column="0">
                          <widget class="QPushButton" name="recent_file4">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>
@@ -2309,6 +2324,9 @@ color:rgb(255,255,255);</string>
                         </property>
                         <item row="0" column="0">
                          <widget class="QPushButton" name="recent_file1">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>
@@ -2354,6 +2372,9 @@ color:rgb(255,255,255);</string>
                         </property>
                         <item row="0" column="0">
                          <widget class="QPushButton" name="recent_file2">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>
@@ -2393,6 +2414,9 @@ color:rgb(255,255,255);</string>
                         </property>
                         <item row="0" column="0">
                          <widget class="QPushButton" name="recent_file3">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                             <horstretch>0</horstretch>
@@ -2500,6 +2524,12 @@ color:rgb(255,255,255);</string>
                 </item>
                 <item row="1" column="1">
                  <widget class="QWidget" name="Open_widget" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);</string>
                   </property>
@@ -3009,7 +3039,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>check_otherbox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>249</x>
+     <x>227</x>
      <y>546</y>
     </hint>
     <hint type="destinationlabel">
@@ -3025,7 +3055,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>check_otherbox()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>174</x>
+     <x>156</x>
      <y>546</y>
     </hint>
     <hint type="destinationlabel">
@@ -3041,7 +3071,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>change()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>324</x>
+     <x>302</x>
      <y>546</y>
     </hint>
     <hint type="destinationlabel">
@@ -3057,7 +3087,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>change()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>544</x>
+     <x>501</x>
      <y>546</y>
     </hint>
     <hint type="destinationlabel">
@@ -3073,7 +3103,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>show_info()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1038</x>
+     <x>952</x>
      <y>547</y>
     </hint>
     <hint type="destinationlabel">
@@ -3105,7 +3135,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>967</x>
+     <x>218</x>
      <y>557</y>
     </hint>
     <hint type="destinationlabel">
@@ -3121,7 +3151,7 @@ checked{background-color: rgb(255, 85, 28); border: none;}</string>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>967</x>
+     <x>218</x>
      <y>557</y>
     </hint>
     <hint type="destinationlabel">

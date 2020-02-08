@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>357</width>
-    <height>100</height>
+    <width>392</width>
+    <height>121</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,7 +50,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>                         정말로 백업하시겠습니까?</string>
+        <string>                              정말로 백업하시겠습니까?</string>
        </property>
       </widget>
      </item>
@@ -65,7 +65,7 @@
        <widget class="QPushButton" name="backup_accept">
         <property name="geometry">
          <rect>
-          <x>90</x>
+          <x>110</x>
           <y>0</y>
           <width>75</width>
           <height>31</height>
@@ -83,7 +83,7 @@ color: rgb(255,255,255);
        <widget class="QPushButton" name="pushButton_2">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>200</x>
           <y>0</y>
           <width>75</width>
           <height>31</height>

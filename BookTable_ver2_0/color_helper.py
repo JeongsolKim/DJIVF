@@ -9,7 +9,7 @@ class Color_helper():
         self.mainwindow = mainwindow
         self.ColorDialog = QColorDialog()
         self.button_list = ['sell_button_2', 'filebackup_button', 'filereset_button', 'setting_save', 'submit_button',
-                            'New_submit_button', 'Open_submit_button', 'colorwidget_button', 'backup_accept']
+                            'New_submit_button', 'Open_submit_button', 'colorwidget_button', 'backup_accept', 'make_file_button']
 
     def get_color_from_setting(self):
         self.color = get_setting('./settings.txt', 'MAINCOLOR')

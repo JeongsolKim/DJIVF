@@ -5,11 +5,13 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot, QSize, QDir, Qt, QEvent
 from BookTable_ver2_0.utils import *
+from BookTable_ver2_0.newfile_answer import Newfile_answer_window
 
 class Newfile_window():
     def __init__(self, mainwindow):
         self.fdir = ''
         self.fname = ''
+        self.new_db_name = ''
 
         self.mainwindow = mainwindow
         self.repaint()
@@ -39,6 +41,17 @@ class Newfile_window():
 
         self.mainwindow.New_dirPlainText.setPlainText(self.fdir)
 
+        if 'xlsx' in self.fdir.split('/')[-1]:
+            self.mainwindow.New_widget.setStyleSheet(
+                'border-image:url(./Images/excel_icon_1.png) 0 0 0 0 stretch stretch')
+            self.mainwindow.New_dirPlainText.setPlainText(self.fdir)
+            self.mainwindow.New_label.setText(self.fdir.split('/')[-1])
+        else:
+            self.mainwindow.New_widget.setStyleSheet(
+                'Image:url(./Images/Drop_icon_excel_2.png); background-color:white')
+            self.mainwindow.New_dirPlainText.setPlainText('')
+            self.mainwindow.New_label.setText('')
+
     def set_file_path(self):  # trick.
         if self.fdir == '':
             return 0
@@ -46,19 +59,33 @@ class Newfile_window():
         self.mainwindow.file_name = self.fname
         self.mainwindow.file_dir = self.fdir
 
+        self.newfile_answer = Newfile_answer_window(self)
+        self.newfile_answer.exec_()
+
+        self.new_db_name = self.newfile_answer.new_db_name
+        self.file_save_N_open()
+
+        self.mainwindow.statusBar().showMessage('New File is made - ' + self.new_db_name + '.db' + '.')
+
+        if self.mainwindow.timer.isActive():
+            self.mainwindow.timer.stop()
+            self.mainwindow.timer.start(int(self.mainwindow.Autosave_step) * 60 * 1000)
+
         self.mainwindow.main_stack.setCurrentIndex(0)
         if self.mainwindow.newfile_button.isChecked():
             self.mainwindow.newfile_button.toggle()
 
+
+    def file_save_N_open(self):
         time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         new_folder = './DB/DB'+time[0:8]
         create_folder(new_folder)
 
-        self.mainwindow.db_dir = new_folder+'/BookTableDB'+time+'.db'
-        Initialize_DB(self.mainwindow.file_dir.replace('/', '\\'), new_folder+'/BookTableDB'+time+'.db')
+        self.mainwindow.db_dir = new_folder+'/'+ self.new_db_name + '.db'
+        Initialize_DB(self.mainwindow.file_dir.replace('/', '\\'), new_folder+'/'+ self.new_db_name + '.db')
 
         # Open file
-        self.mainwindow.excel = Open_DB(new_folder+'/BookTableDB'+time+'.db')
+        self.mainwindow.excel = Open_DB(new_folder+'/'+ self.new_db_name + '.db')
 
         # update main window
         self.mainwindow.update_main_tables()
