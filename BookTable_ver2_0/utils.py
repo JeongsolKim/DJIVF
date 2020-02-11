@@ -91,6 +91,24 @@ def Open_DB(db_dir):
     df = pd.DataFrame(L, columns=['책이름','저자','정가','판매가','수량','판매여부','판매방법','판매일시'])
     return df
 
+def recent_DB(db_folder, top = 6):
+    file_time_list = []
+
+    for (path, dir, files) in os.walk(db_folder):
+        for filename in files:
+            if 'backup' in filename: continue
+            if filename.split('.')[-1] != 'db': continue
+            fileMtime = dt.fromtimestamp(os.path.getmtime(path + '\\' + filename)).strftime("%Y-%m-%d %H:%M:%S")
+            file_time_list.append([path, filename, fileMtime])
+
+    file_time_list.sort(key = lambda file_time_list: file_time_list[2])
+    file_time_list.reverse()
+
+    if len(file_time_list) > top:
+        return file_time_list[0:top]
+    else:
+        return file_time_list
+
 def only_one_menu_button_click(btn_list, one_button):
     for check_btn in btn_list:
         if not check_btn.objectName() == one_button:

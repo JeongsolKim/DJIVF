@@ -14,7 +14,7 @@ from BookTable_ver2_0.status_window import Status_window
 from BookTable_ver2_0.figure_helper import Figure_helper
 from BookTable_ver2_0.utils import *
 
-main_class = uic.loadUiType("main_design.ui")[0]
+main_class = uic.loadUiType("main_renewal.ui")[0]
 
 class MyWindow(QMainWindow, main_class):
     def __init__(self):
@@ -23,6 +23,7 @@ class MyWindow(QMainWindow, main_class):
         #self.setWindowFlags(Qt.FramelessWindowHint)
 
         # initialize for file directory.
+        self.file_name = ''
         self.file_dir = ''
         self.folder_name = ''
         self.folder_dir = ''
@@ -33,9 +34,9 @@ class MyWindow(QMainWindow, main_class):
         self.nonsell_list = []
 
         # Search bar icon setting.
-        self.search_icon_size = 25
-        self.search_icon.setIcon(QtGui.QIcon('./Images/active-search.png'))
-        self.search_icon.setIconSize(QSize(self.search_icon_size, self.search_icon_size))
+        #self.search_icon_size = 25
+        #self.search_icon.setIcon(QtGui.QIcon('./Images/active-search.png'))
+        #self.search_icon.setIconSize(QSize(self.search_icon_size, self.search_icon_size))
 
         # Menu bar icon setting.
         self.menu_icon_size = 40
@@ -51,6 +52,16 @@ class MyWindow(QMainWindow, main_class):
         self.openfile_button.setIconSize(QSize(self.menu_icon_size, self.menu_icon_size))
         self.savefile_button.setIcon(QtGui.QIcon('./Images/savefile_icon_1.png'))
         self.savefile_button.setIconSize(QSize(self.menu_icon_size, self.menu_icon_size))
+
+        # Talbe header size control
+        nonsell_header = self.nonsell_table.horizontalHeader()
+        nonsell_header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        nonsell_header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+
+        sell_header = self.timesell_table.horizontalHeader()
+        sell_header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        sell_header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        sell_header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
 
         # initialize for color
         self.color_helper = Color_helper(self)
@@ -143,20 +154,20 @@ class MyWindow(QMainWindow, main_class):
             return 0
 
         if self.sender().objectName() == 'savefile_button':
-            self.statusBar.showMessage('Saving...', 1000)
+            self.statusBar().showMessage('Saving...', 1000)
         else:
-            self.statusBar.showMessage('AutoSaving...', 1000)
+            self.statusBar().showMessage('AutoSaving...', 1000)
 
         save_DB(self.excel, self.db_dir)
 
         self.last_save = datetime.datetime.now()
         if self.sender().objectName() == 'savefile_button':
-            self.statusBar.showMessage('Last save: '+self.last_save.strftime("%Y-%m-%d %H:%M:%S")+'.')
+            self.statusBar().showMessage('Last save: '+self.last_save.strftime("%Y-%m-%d %H:%M:%S")+'.')
         else:
-            self.statusBar.showMessage('Last save: ' + self.last_save.strftime("%Y-%m-%d %H:%M:%S") + ' (autosave).')
+            self.statusBar().showMessage('Last save: ' + self.last_save.strftime("%Y-%m-%d %H:%M:%S") + ' (autosave).')
 
     def change(self):
-        if self.file_dir == '':
+        if self.db_dir == '':
             return 0
         soldcol = self.excel.columns.get_loc('판매여부')
         timecol = self.excel.columns.get_loc('판매일시')
