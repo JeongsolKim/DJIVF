@@ -18,6 +18,7 @@ class Status_window():
         self.update_percentage_bar()
         self.update_table()
         self.update_graph()
+        self.update_total()
 
     def update_table(self):
         timecol = self.mainwindow.excel.columns.get_loc('판매일시')
@@ -73,8 +74,9 @@ class Status_window():
             self.figure_helper.canvas.show()
 
     def update_total(self):
+        # target = mainwindow.total_status_plain (QPlainTextEdit)
         pricecol = self.mainwindow.excel.columns.get_loc('판매가')
         price = 0
         for book in self.slist:
             price += int(book[pricecol])
-        self.mainwindow.total.setText(str(price))
+        self.mainwindow.total_line.setText(str(price)+' 원')
