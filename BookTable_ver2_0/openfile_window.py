@@ -60,6 +60,7 @@ class Openfile_window():
         self.mainwindow.main_stack.setCurrentIndex(0)
         if self.mainwindow.openfile_button.isChecked():
             self.mainwindow.openfile_button.toggle()
+            self.mainwindow.sell_button.toggle()
 
         # Open file
         self.mainwindow.excel = Open_DB(self.mainwindow.db_dir.replace('/', '\\'))

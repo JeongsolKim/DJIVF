@@ -31,7 +31,7 @@ class Figure_helper():
         self.ax.set_ylim([0, self.max_h*1.5])
         #self.ax.set_ylabel('판매 권수')
         #self.ax.set_xlabel('판매 일자')
-        self.ax.legend(tuple([x[0] for x in self.rects]), ('cash', 'account'))
+        self.ax.legend(tuple([x[0] for x in self.rects]), ('cash', 'account'), loc='upper center')
 
         self.canvas.draw()
         self.canvas.show()

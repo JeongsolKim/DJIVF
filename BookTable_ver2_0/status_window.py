@@ -35,6 +35,7 @@ class Status_window():
 
         date_list = []
         sep_list = []
+        # separate sold books by date.
         if self.slist:
             self.slist.sort(key=lambda x: x[timecol])
             temp_date = self.slist[0][timecol].split(' ')[0]
@@ -52,7 +53,7 @@ class Status_window():
 
             cash_list = []
             account_list = []
-
+            # separate books in each dates into cash and account
             for one_Date in sep_list:
                 cash_num = 0
                 account_num = 0
@@ -65,6 +66,11 @@ class Status_window():
                 account_list.append(account_num)
 
             self.figure_helper.draw_group_bar_graph(np.arange(len(date_list)), [cash_list, account_list], date_list)
+
+        else:
+            self.figure_helper.ax.clear()
+            self.figure_helper.canvas.draw()
+            self.figure_helper.canvas.show()
 
     def update_total(self):
         pricecol = self.mainwindow.excel.columns.get_loc('판매가')
