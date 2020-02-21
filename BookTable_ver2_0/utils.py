@@ -35,12 +35,15 @@ def set_setting(file, property, value):
         f.truncate()
 
 def Initialize_DB(data_dir, save_dir): # dataframe into database
-    con = sqlite3.connect(save_dir)
-
     excel = pd.read_excel(data_dir)
-    excel = excel_file_initialize(excel)
+    is_ok, excel = excel_file_initialize(excel)
+
+    if not is_ok:
+        return 0
+
     excel_list = excel.values.tolist()
 
+    con = sqlite3.connect(save_dir)
     cur = con.cursor()
     query = 'CREATE TABLE IF NOT EXISTS booktable(' \
             'book_id INTEGER PRIMARY KEY AUTOINCREMENT,' \
@@ -58,6 +61,7 @@ def Initialize_DB(data_dir, save_dir): # dataframe into database
      VALUES(?, ?, ?, ?, ?, ?, ?, ?);", excel_list)
     con.commit()
     con.close()
+    return True
 
 def save_DB(df, db_dir):
     con = sqlite3.connect(db_dir)
@@ -134,6 +138,9 @@ def excel_file_initialize(excel): # Remove empty rows, Add additional columns (�
     value_list = list(excel.values.tolist())
 
     for book in value_list:
+        if len(book) != 5:
+            return (False, None)
+
         if isNaN(book[0]):
             continue
         elif isNaN(book[1]):
@@ -166,7 +173,7 @@ def excel_file_initialize(excel): # Remove empty rows, Add additional columns (�
     howsell = pd.DataFrame({'판매방법':['-']*(num_row-len(empty_index))}, index=append_index)
     whensell = pd.DataFrame({'판매일시':['-']*(num_row-len(empty_index))}, index=append_index)
 
-    return pd.concat([new_excel, pd.concat([issell, howsell, whensell], axis=1)], axis=1)
+    return (True, pd.concat([new_excel, pd.concat([issell, howsell, whensell], axis=1)], axis=1))
 
 def separate_book(file, target='', date=False):
     nonsell_list = []

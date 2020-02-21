@@ -41,12 +41,13 @@ class Newfile_window():
 
         self.mainwindow.New_dirPlainText.setPlainText(self.fdir)
 
-        if 'xlsx' in self.fdir.split('/')[-1]:
+        if self.fdir.endswith('xlsx'):
             self.mainwindow.New_widget.setStyleSheet(
                 'border-image:url(./Images/excel_icon_1.png) 0 0 0 0 stretch stretch')
             self.mainwindow.New_dirPlainText.setPlainText(self.fdir)
             self.mainwindow.New_label.setText(self.fdir.split('/')[-1])
         else:
+            self.fdir = ''
             self.mainwindow.New_widget.setStyleSheet(
                 'Image:url(./Images/Drop_icon_excel_2.png); background-color:white')
             self.mainwindow.New_dirPlainText.setPlainText('')
@@ -62,8 +63,20 @@ class Newfile_window():
         self.newfile_answer = Newfile_answer_window(self)
         self.newfile_answer.exec_()
 
-        self.new_db_name = self.newfile_answer.new_db_name
-        self.file_save_N_open()
+        if self.newfile_answer.new_db_name == '':
+            return 0
+        else:
+            self.new_db_name = self.newfile_answer.new_db_name
+
+        is_ok = self.file_save_N_open()
+
+        if not is_ok:
+            self.mainwindow.statusBar().showMessage('File is something wrong... - ')
+            self.mainwindow.New_widget.setStyleSheet(
+                'Image:url(./Images/Drop_icon_excel_2.png); background-color:white')
+            self.mainwindow.New_dirPlainText.setPlainText('')
+            self.mainwindow.New_label.setText('')
+            return 0
 
         self.mainwindow.statusBar().showMessage('New File is made - ' + self.new_db_name + '.db' + '.')
 
@@ -82,13 +95,16 @@ class Newfile_window():
         create_folder(new_folder)
 
         self.mainwindow.db_dir = new_folder+'/'+ self.new_db_name + '.db'
-        Initialize_DB(self.mainwindow.file_dir.replace('/', '\\'), new_folder+'/'+ self.new_db_name + '.db')
+        is_ok = Initialize_DB(self.mainwindow.file_dir.replace('/', '\\'), new_folder+'/'+ self.new_db_name + '.db')
+        if not is_ok:
+            return 0
 
         # Open file
         self.mainwindow.excel = Open_DB(new_folder+'/'+ self.new_db_name + '.db')
 
         # update main window
         self.mainwindow.update_main_tables()
+        return True
 
     def repaint(self):
         self.fdir = ''
