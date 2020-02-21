@@ -52,7 +52,9 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>  생성할 파일의 이름을 입력해주세요.</string>
+           <string>  생성할 파일의 이름을 입력해주세요.
+파일 이름에는 다음 문자를 사용할 수 없습니다.
+ \ / : * ? &quot; &lt; &gt; | </string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

@@ -107,7 +107,11 @@
                   <item>
                    <layout class="QGridLayout" name="gridLayout_13">
                     <item row="0" column="0">
-                     <widget class="QCalendarWidget" name="calendarWidget"/>
+                     <widget class="QCalendarWidget" name="calendarWidget">
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(0, 0, 0);</string>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>

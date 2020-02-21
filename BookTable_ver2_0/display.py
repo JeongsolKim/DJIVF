@@ -14,6 +14,11 @@ from BookTable_ver2_0.status_window import Status_window
 from BookTable_ver2_0.figure_helper import Figure_helper
 from BookTable_ver2_0.utils import *
 
+# to show custom icon on task bar.
+import ctypes
+myappid = 'jeongsolKim.jaeminYu.DJIVF.ver2' # arbitrary string
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
 main_class = uic.loadUiType("main_renewal.ui")[0]
 
 class MyWindow(QMainWindow, main_class):
@@ -21,6 +26,15 @@ class MyWindow(QMainWindow, main_class):
         super().__init__()
         self.setupUi(self)
         #self.setWindowFlags(Qt.FramelessWindowHint)
+
+        # fix screen size to maximum.
+        self.showMaximized()
+
+        # set window icon
+        self.setWindowIcon(QtGui.QIcon('images/fileicon.png'))
+
+        # set font
+        # self.setFont(QtGui.QFont("맑은 고딕 Semilight", 20, QtGui.QFont.Bold))
 
         # initialize for file directory.
         self.file_name = ''
@@ -39,7 +53,7 @@ class MyWindow(QMainWindow, main_class):
         #self.search_icon.setIconSize(QSize(self.search_icon_size, self.search_icon_size))
 
         # Menu bar icon setting.
-        self.menu_icon_size = 40
+        self.menu_icon_size = 50
         self.sell_button.setIcon(QtGui.QIcon('./Images/sell_icon_1.png'))
         self.sell_button.setIconSize(QSize(self.menu_icon_size, self.menu_icon_size))
         self.status_button.setIcon(QtGui.QIcon('./Images/status_icon_1.png'))
@@ -92,9 +106,10 @@ class MyWindow(QMainWindow, main_class):
         btn_num = btn_name.index(sender_btn.objectName()) # try and catch ValueError -> return 0.
 
         if self.main_stack.currentIndex() == btn_num:
-            if not self.sell_button.isChecked():
-                self.sell_button.toggle()
-            return 0
+            if not sender_btn.isChecked():
+                sender_btn.toggle()
+                return 0
+
         self.main_stack.setCurrentIndex(btn_num)
         only_one_menu_button_click(btn_list, sender_btn.objectName())
 
